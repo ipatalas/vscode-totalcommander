@@ -15,11 +15,11 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	}
 
-	context.subscriptions.push(vscode.commands.registerCommand('vscode.conemu', (uri?: vscode.Uri) => {
+	context.subscriptions.push(vscode.commands.registerCommand('vscode.totalcommander', (uri?: vscode.Uri) => {
 		// tslint:disable-next-line:curly
 		if (!isCompatiblePlatform || !checkConfiguration()) return;
 
-		if (uri && uri.scheme !== "untitled") {
+		if (uri && uri.fsPath && uri.scheme !== "untitled") {
 			runConEmu(path.dirname(uri.fsPath));
 		} else if (vscode.window.activeTextEditor && !vscode.window.activeTextEditor.document.isUntitled) {
 			runConEmu(path.dirname(vscode.window.activeTextEditor.document.uri.fsPath));
@@ -31,28 +31,50 @@ export function activate(context: vscode.ExtensionContext) {
 
 const runConEmu = (path: string) => {
 	let config = getConfig();
-	let reuseInstanceArg = config.reuseInstance ? "-Single" : "-NoSingle";
+	let args: string[] = [];
 
-	child.execFile(config.path, ["-dir", path, reuseInstanceArg]);
+	if (config.reuseInstance) {
+		args.push("/O");
+	}
+
+	if (config.panel === "left") {
+		args.push(`/L=${path}`);
+	} else {
+		args.push(`/R=${path}`);
+	}
+
+	if (config.createNewTab) {
+		args.push("/T");
+	}
+
+	child.execFile(config.path, args);
 };
 
 const checkConfiguration = () => {
 	let config = getConfig();
 
 	if (!config.path) {
-		vscode.window.showInformationMessage(messages.ConEmuPathNotConfigured, messages.OpenSettings).then(openSettingsCallback);
+		let path = process.env.COMMANDER_EXE;
+		if (path) {
+			const cfg = vscode.workspace.getConfiguration("TotalCommander");
+			cfg.update("path", path, true);
+			vscode.window.showInformationMessage(messages.TotalCommanderPathDetected + path, messages.OpenSettings).then(openSettingsCallback);
+			return true;
+		}
+
+		vscode.window.showInformationMessage(messages.TotalCommanderPathNotConfigured, messages.OpenSettings).then(openSettingsCallback);
 		return false;
 	}
 
 	if (!fs.existsSync(config.path)) {
-		vscode.window.showInformationMessage(messages.ConEmuPathInvalid, messages.OpenSettings).then(openSettingsCallback);
+		vscode.window.showInformationMessage(messages.TotalCommanderPathInvalid, messages.OpenSettings).then(openSettingsCallback);
 		return false;
 	}
 
 	return true;
 };
 
-const getConfig = () => vscode.workspace.getConfiguration("ConEmu") as any as IConfig;
+const getConfig = () => vscode.workspace.getConfiguration("TotalCommander") as any as IConfig;
 
 const openSettingsCallback = (btn) => {
 	if (btn === messages.OpenSettings) {
@@ -62,13 +84,16 @@ const openSettingsCallback = (btn) => {
 interface IConfig {
 	path: string;
 	reuseInstance: boolean;
+	createNewTab: boolean;
+	panel: "left" | "right";
 };
 
 const messages = {
 	WindowsOnly: "This extension works only on Windows, sorry",
 	ShowInfo: "Show Info",
-	ReadmeUrl: "https://github.com/ipatalas/vscode-conemu/blob/master/README.md",
-	ConEmuPathNotConfigured: "ConEmu path is not configured. Set proper path in ConEmu.path setting",
-	OpenSettings: "Open Settings",
-	ConEmuPathInvalid: "ConEmu path is invalid, please correct it."
+	ReadmeUrl: "https://github.com/ipatalas/vscode-totalcommander/blob/master/README.md",
+	TotalCommanderPathNotConfigured: "Total Commander path is not configured. Set proper path in TotalCommander.path setting",
+	TotalCommanderPathInvalid: "Total Commander path is invalid, please correct it.",
+	TotalCommanderPathDetected: "Total Commander path was auto-detected to ",
+	OpenSettings: "Open Settings"
 };

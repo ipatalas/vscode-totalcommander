@@ -1,76 +1,90 @@
 {
-	"name": "vscode-conemu",
-	"displayName": "ConEmu Launcher",
-	"description": "ConEmu Launcher for VS Code",
+	"name": "vscode-totalcommander",
+	"displayName": "Total Commander Launcher",
+	"description": "Total Commander Launcher for VS Code",
 	"version": "1.0.0",
 	"author": "Ireneusz Patalas",
 	"publisher": "ipatalas",
 	"engines": {
-		"vscode": "^1.5.0"
+		"vscode": "^1.6.0"
 	},
 	"categories": [
 		"Other"
 	],
-	"icon": "images/conemu-icon.png",
+	"icon": "images/logo128.png",
 	"galleryBanner": {
-		"color": "#999",
+		"color": "#fff",
 		"theme": "dark"
 	},
 	"activationEvents": [
-		"onCommand:vscode.conemu"
+		"onCommand:vscode.totalcommander"
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ipatalas/vscode-conemu"
+		"url": "https://github.com/ipatalas/vscode-totalcommander"
 	},
 	"main": "./out/src/extension",
 	"contributes": {
 		"commands": [{
-			"command": "vscode.conemu",
-			"title": "Open in ConEmu",
+			"command": "vscode.totalcommander",
+			"title": "Open in Total Commander",
 			"icon": {
-				"dark": "./images/dark-icon.svg",
-				"light": "./images/light-icon.svg"
+				"dark": "./images/icon.png",
+				"light": "./images/icon.png"
 			}
 		}],
 		"configuration": {
-			"title": "ConEmu Launcher",
+			"title": "Total Commander Launcher",
 			"properties": {
-				"ConEmu.path": {
+				"TotalCommander.path": {
 					"type": "string",
-					"description": "Path to ConEmu executable (ConEmu.exe/ConEmu64.exe)"
+					"description": "Path to Total Commander executable (TotalCmd.exe/TotalCmd64.exe)"
 				},
-				"ConEmu.reuseInstance": {
+				"TotalCommander.reuseInstance": {
 					"type": "boolean",
-					"description": "Flag indicating whether to use existing instance of ConEmu or open new window",
+					"description": "Flag indicating whether to use existing instance of Total Commander or open new one",
 					"default": true
 				},
-				"ConEmu.showTitlebarIcon": {
+				"TotalCommander.showTitlebarIcon": {
 					"type": "boolean",
 					"description": "Flag indicating whether to show button on titlebar",
 					"default": false
+				},
+				"TotalCommander.createNewTab": {
+					"type": "boolean",
+					"description": "Flag indicating whether to open directory in new tab",
+					"default": true
+				},
+				"TotalCommander.panel": {
+					"type": "string",
+					"enum": [
+						"left",
+						"right"
+					],
+					"default": "right",
+					"description": "Which panel to open directory in"
 				}
 			}
 		},
 		"keybindings":[
 			{
-				"command": "vscode.conemu",
-				"key": "shift+alt+c",
+				"command": "vscode.totalcommander",
+				"key": "ctrl+shift+k",
 				"when": "!terminalFocus"
 			}
 		],
 		"menus": {
 			"explorer/context": [{
-				"command": "vscode.conemu",
+				"command": "vscode.totalcommander",
 				"group": "navigation@99"
 			}],
 			"editor/title/context": [{
-				"command": "vscode.conemu"
+				"command": "vscode.totalcommander"
 			}],
 			"editor/title": [{
-				"command": "vscode.conemu",
+				"command": "vscode.totalcommander",
 				"group": "navigation",
-				"when": "config.ConEmu.showTitlebarIcon"
+				"when": "config.TotalCommander.showTitlebarIcon"
 			}]
 		}
 	},
