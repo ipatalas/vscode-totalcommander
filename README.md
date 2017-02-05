@@ -1,24 +1,25 @@
-[![bitHound Dependencies](https://www.bithound.io/github/ipatalas/vscode-conemu/badges/dependencies.svg)](https://www.bithound.io/github/ipatalas/vscode-conemu/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/ipatalas/vscode-conemu/badges/code.svg)](https://www.bithound.io/github/ipatalas/vscode-conemu)
+[![bitHound Dependencies](https://www.bithound.io/github/ipatalas/vscode-totalcommander/badges/dependencies.svg)](https://www.bithound.io/github/ipatalas/vscode-totalcommander/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/github/ipatalas/vscode-totalcommander/badges/code.svg)](https://www.bithound.io/github/ipatalas/vscode-totalcommander)
 
-# ConEmu Launcher
+# Total Commander Launcher
 
-This extension has been inspired by [ConEmu](https://conemu.github.io/), a great console replacement.
-I've been using it for years now and really cannot imagine life without it on Windows. I know there are other great replacements but this suits me best so far.
+This extension allows you to open Total Commander in path of an actively edited file.
 
-However internal console terminal in VS Code does not like me or I don't like it... I always forget. No offence for it but I just prefer to have consistent console experience no matter what IDE I use.
-I'm constantly switching between console and Code but I lacked the ability to quickly navigate to a file I'm working on in console. This isn't necessary for git but for some actions I've noticed it would be nice to have such possibility.
-Writing extensions for Code is really easy so here we are...
+## Setup
+
+Path to Total Commander must be set before the extension can work. Check [Settings](##Extension-Settings).
+
+Extension will try to auto-detect the path based on environment variables which Total Commander sets itself. If you open VS Code from Total Commander (which is 90% of cases for me) it will inherit its environment which will allow auto-detection to work.
 
 ## Features
 
 Extension contributes one command:
 
-* `Open in ConEmu`: opens ConEmu console window in current file's path
+* `Open in Total Commander`: opens Total Commander window/tab in current file's path
 
 > Note: If the command cannot infer filepath from current document (untitled unsaved files) it opens the project folder.
 
-This command can be executed directly from **Command Pallete** or from keyboard shortcut (default: *Shift-Alt-C*)  
+This command can be executed directly from **Command Pallete** or from keyboard shortcut (default: *Ctrl-Shift-K*)
 It's also available from few other places shown below:
 
 * File explorer context menu:
@@ -33,27 +34,19 @@ It's also available from few other places shown below:
 
 ![File explorer](images/titlebar.png)
 
-To overwrite default **Command Prompt** (plain old ugly cmd) shortcut with **ConEmu** just put the following section into *keybindings.json*
-
-```JSON
-{
-	"key": "ctrl+shift+c",
-	"command": "vscode.conemu",
-	"when": "!terminalFocus"
-}
-```
-
 ## Requirements
 
-This extension is meant to be used only on Windows as obviously ConEmu is available there. It won't crash on other systems though, but won't work there as well.
+This extension is meant to be used only on Windows as obviously Total Commander is available there. It won't crash on other systems though, but won't work there as well.
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
-* `ConEmu.path`: full path to ConEmu executable (ConEmu.exe/ConEmu64.exe)
-* `ConEmu.reuseInstance`: open console in existing instance or always new window
-* `ConEmu.showTitlebarIcon`: show button in title bar (default: false)
+* `TotalCommander.path`: full path to Total Commander executable (TotalCmd.exe/TotalCmd64.exe)
+* `TotalCommander.reuseInstance`: open in existing instance of Total Commander
+* `TotalCommander.showTitlebarIcon`: show button in title bar (default: false)
+* `TotalCommander.createNewTab`: open path in new tab
+* `TotalCommander.panel`: which panel to open path in (left/right)
 
 ## Release Notes
 ### 1.0.0
