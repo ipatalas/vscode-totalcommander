@@ -1,0 +1,88 @@
+{
+	"name": "vscode-conemu",
+	"displayName": "ConEmu Launcher",
+	"description": "ConEmu Launcher for VS Code",
+	"version": "1.0.0",
+	"author": "Ireneusz Patalas",
+	"publisher": "ipatalas",
+	"engines": {
+		"vscode": "^1.5.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"icon": "images/conemu-icon.png",
+	"galleryBanner": {
+		"color": "#999",
+		"theme": "dark"
+	},
+	"activationEvents": [
+		"onCommand:vscode.conemu"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ipatalas/vscode-conemu"
+	},
+	"main": "./out/src/extension",
+	"contributes": {
+		"commands": [{
+			"command": "vscode.conemu",
+			"title": "Open in ConEmu",
+			"icon": {
+				"dark": "./images/dark-icon.svg",
+				"light": "./images/light-icon.svg"
+			}
+		}],
+		"configuration": {
+			"title": "ConEmu Launcher",
+			"properties": {
+				"ConEmu.path": {
+					"type": "string",
+					"description": "Path to ConEmu executable (ConEmu.exe/ConEmu64.exe)"
+				},
+				"ConEmu.reuseInstance": {
+					"type": "boolean",
+					"description": "Flag indicating whether to use existing instance of ConEmu or open new window",
+					"default": true
+				},
+				"ConEmu.showTitlebarIcon": {
+					"type": "boolean",
+					"description": "Flag indicating whether to show button on titlebar",
+					"default": false
+				}
+			}
+		},
+		"keybindings":[
+			{
+				"command": "vscode.conemu",
+				"key": "shift+alt+c",
+				"when": "!terminalFocus"
+			}
+		],
+		"menus": {
+			"explorer/context": [{
+				"command": "vscode.conemu",
+				"group": "navigation@99"
+			}],
+			"editor/title/context": [{
+				"command": "vscode.conemu"
+			}],
+			"editor/title": [{
+				"command": "vscode.conemu",
+				"group": "navigation",
+				"when": "config.ConEmu.showTitlebarIcon"
+			}]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/node": "^7.0.5",
+		"typescript": "^2.1.5",
+		"vscode": "^1.0.3"
+	}
+}
