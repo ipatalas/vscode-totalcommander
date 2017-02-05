@@ -13,8 +13,8 @@
 	],
 	"icon": "images/logo128.png",
 	"galleryBanner": {
-		"color": "#fff",
-		"theme": "dark"
+		"color": "#CEE6FF",
+		"theme": "light"
 	},
 	"activationEvents": [
 		"onCommand:vscode.totalcommander"
