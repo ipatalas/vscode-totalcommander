@@ -7,7 +7,7 @@ This extension allows you to open Total Commander in path of an actively edited 
 
 ## Setup
 
-Path to Total Commander must be set before the extension can work. Check [Settings](##Extension-Settings).
+Path to Total Commander must be set before the extension can work. Check [Settings](#Extension-Settings).
 
 Extension will try to auto-detect the path based on environment variables which Total Commander sets itself. If you open VS Code from Total Commander (which is 90% of cases for me) it will inherit its environment which will allow auto-detection to work.
 
