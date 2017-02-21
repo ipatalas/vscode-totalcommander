@@ -2,7 +2,7 @@
 	"name": "vscode-totalcommander",
 	"displayName": "Total Commander Launcher",
 	"description": "Total Commander Launcher for VS Code",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"author": "Ireneusz Patalas",
 	"publisher": "ipatalas",
 	"engines": {
@@ -66,13 +66,6 @@
 				}
 			}
 		},
-		"keybindings":[
-			{
-				"command": "vscode.totalcommander",
-				"key": "ctrl+shift+k",
-				"when": "!terminalFocus"
-			}
-		],
 		"menus": {
 			"explorer/context": [{
 				"command": "vscode.totalcommander",

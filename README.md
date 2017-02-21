@@ -19,7 +19,7 @@ Extension contributes one command:
 
 > Note: If the command cannot infer filepath from current document (untitled unsaved files) it opens the project folder.
 
-This command can be executed directly from **Command Pallete** or from keyboard shortcut (default: *Ctrl-Shift-K*)
+This command can be executed directly from **Command Pallete** or from keyboard shortcut
 It's also available from few other places shown below:
 
 * File explorer context menu:
@@ -49,9 +49,13 @@ This extension contributes the following settings:
 * `TotalCommander.panel`: which panel to open path in (left/right)
 
 ## Release Notes
+
+### 1.0.1
+
+- Removed default key binding
 ### 1.0.0
 
-Initial release
+- Initial release
 
 ---
 
