@@ -50,6 +50,10 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.0.2
+
+- Active/selected file is now also selected in TC after calling the command instead of just opening the containing folder
+
 ### 1.0.1
 
 - Removed default key binding
