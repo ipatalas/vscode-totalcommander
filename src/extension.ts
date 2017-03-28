@@ -1,6 +1,5 @@
 'use strict';
 import * as vscode from 'vscode';
-import * as path from 'path';
 import * as fs from 'fs';
 import * as child from 'child_process';
 
@@ -20,16 +19,16 @@ export function activate(context: vscode.ExtensionContext) {
 		if (!isCompatiblePlatform || !checkConfiguration()) return;
 
 		if (uri && uri.fsPath && uri.scheme !== "untitled") {
-			runConEmu(path.dirname(uri.fsPath));
+			runTotalCommander(uri.fsPath);
 		} else if (vscode.window.activeTextEditor && !vscode.window.activeTextEditor.document.isUntitled) {
-			runConEmu(path.dirname(vscode.window.activeTextEditor.document.uri.fsPath));
+			runTotalCommander(vscode.window.activeTextEditor.document.uri.fsPath);
 		} else if (vscode.workspace.rootPath) {
-			runConEmu(vscode.workspace.rootPath);
+			runTotalCommander(vscode.workspace.rootPath);
 		}
 	}));
 }
 
-const runConEmu = (path: string) => {
+const runTotalCommander = (path: string) => {
 	let config = getConfig();
 	let args: string[] = [];
 
