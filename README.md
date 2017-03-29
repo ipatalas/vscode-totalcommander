@@ -50,6 +50,10 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.0.3
+
+- Total Commander is no longer killed after closing Code when TC process had been started by the extension
+
 ### 1.0.2
 
 - Active/selected file is now also selected in TC after calling the command instead of just opening the containing folder
