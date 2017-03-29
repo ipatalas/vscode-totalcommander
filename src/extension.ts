@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 const runTotalCommander = (path: string) => {
 	let config = getConfig();
-	let args: string[] = [];
+	let args: string[] = ["/c", "start", "/b", config.path];
 
 	if (config.reuseInstance) {
 		args.push("/O");
@@ -46,7 +46,7 @@ const runTotalCommander = (path: string) => {
 		args.push("/T");
 	}
 
-	child.execFile(config.path, args);
+	child.spawn("cmd", args);
 };
 
 const checkConfiguration = () => {
