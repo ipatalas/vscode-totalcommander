@@ -50,7 +50,7 @@ const runTotalCommander = (path: string) => {
 		args.push("/T");
 	}
 
-	child.exec(`${quote(config.path)} ${args.join(' ')}`, (error: Error, stdout: string, stderr: string) => {
+	child.exec(`${quote(config.path)} ${args.join(' ')}`, (error: Error, _stdout: string, stderr: string) => {
 		if (error || stderr) {
 			const outputChannel = vscode.window.createOutputChannel(pkg.displayName);
 
