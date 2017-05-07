@@ -3,6 +3,9 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as child from 'child_process';
 
+// tslint:disable-next-line:no-var-requires
+const pkg = require('../../package.json');
+
 const isCompatiblePlatform = process.platform === 'win32';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -29,31 +32,46 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 const runTotalCommander = (path: string) => {
-	let config = getConfig();
-	let args: string[] = ["/c", "start", "/b", config.path];
+	const config = getConfig();
+	const quote = (p: string) => p.includes(" ") ? `"${p}"` : p;
+	const args: string[] = [];
 
 	if (config.reuseInstance) {
 		args.push("/O");
 	}
 
 	if (config.panel === "left") {
-		args.push(`/L=${path}`);
+		args.push(`/L=${quote(path)}`);
 	} else {
-		args.push(`/R=${path}`);
+		args.push(`/R=${quote(path)}`);
 	}
 
 	if (config.createNewTab) {
 		args.push("/T");
 	}
 
-	child.spawn("cmd", args);
+	child.exec(`${quote(config.path)} ${args.join(' ')}`, (error: Error, stdout: string, stderr: string) => {
+		if (error || stderr) {
+			const outputChannel = vscode.window.createOutputChannel(pkg.displayName);
+
+			if (error) {
+				outputChannel.appendLine(error.message);
+			}
+
+			if (stderr) {
+				outputChannel.appendLine(stderr);
+			}
+
+			outputChannel.show();
+		}
+	});
 };
 
 const checkConfiguration = () => {
-	let config = getConfig();
+	const config = getConfig();
 
 	if (!config.path) {
-		let path = process.env.COMMANDER_EXE;
+		const path = process.env.COMMANDER_EXE;
 		if (path) {
 			const cfg = vscode.workspace.getConfiguration("TotalCommander");
 			cfg.update("path", path, true);
@@ -85,7 +103,7 @@ interface IConfig {
 	reuseInstance: boolean;
 	createNewTab: boolean;
 	panel: "left" | "right";
-};
+}
 
 const messages = {
 	WindowsOnly: "This extension works only on Windows, sorry",
