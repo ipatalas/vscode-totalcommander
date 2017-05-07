@@ -50,6 +50,10 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.0.4
+
+- Total Commander didn't start if it was installed in a directory with spaces
+
 ### 1.0.3
 
 - Total Commander is no longer killed after closing Code when TC process had been started by the extension
@@ -61,6 +65,7 @@ This extension contributes the following settings:
 ### 1.0.1
 
 - Removed default key binding
+
 ### 1.0.0
 
 - Initial release
