@@ -1,6 +1,3 @@
-[![bitHound Dependencies](https://www.bithound.io/github/ipatalas/vscode-totalcommander/badges/dependencies.svg)](https://www.bithound.io/github/ipatalas/vscode-totalcommander/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/ipatalas/vscode-totalcommander/badges/code.svg)](https://www.bithound.io/github/ipatalas/vscode-totalcommander)
-
 # Total Commander Launcher
 
 This extension allows you to open Total Commander in path of an actively edited file.
