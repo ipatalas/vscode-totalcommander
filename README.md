@@ -1,3 +1,6 @@
+[![Codacy 
+Badge](https://api.codacy.com/project/badge/Grade/20efa6e3569940ed9b9bb818a19bb1d8)](https://www.codacy.com/app/ipatalas/vscode-totalcommander?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ipatalas/vscode-totalcommander&amp;utm_campaign=Badge_Grade)
+
 # Total Commander Launcher
 
 This extension allows you to open Total Commander in path of an actively edited file.
