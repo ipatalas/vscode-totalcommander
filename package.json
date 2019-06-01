@@ -25,14 +25,16 @@
 	},
 	"main": "./out/src/extension",
 	"contributes": {
-		"commands": [{
-			"command": "vscode.totalcommander",
-			"title": "Open in Total Commander",
-			"icon": {
-				"dark": "./images/icon.png",
-				"light": "./images/icon.png"
+		"commands": [
+			{
+				"command": "vscode.totalcommander",
+				"title": "Open in Total Commander",
+				"icon": {
+					"dark": "./images/icon.png",
+					"light": "./images/icon.png"
+				}
 			}
-		}],
+		],
 		"configuration": {
 			"title": "Total Commander Launcher",
 			"properties": {
@@ -67,18 +69,24 @@
 			}
 		},
 		"menus": {
-			"explorer/context": [{
-				"command": "vscode.totalcommander",
-				"group": "navigation@99"
-			}],
-			"editor/title/context": [{
-				"command": "vscode.totalcommander"
-			}],
-			"editor/title": [{
-				"command": "vscode.totalcommander",
-				"group": "navigation",
-				"when": "config.TotalCommander.showTitlebarIcon"
-			}]
+			"explorer/context": [
+				{
+					"command": "vscode.totalcommander",
+					"group": "navigation@99"
+				}
+			],
+			"editor/title/context": [
+				{
+					"command": "vscode.totalcommander"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "vscode.totalcommander",
+					"group": "navigation",
+					"when": "config.TotalCommander.showTitlebarIcon"
+				}
+			]
 		}
 	},
 	"scripts": {
@@ -88,8 +96,8 @@
 		"test": "node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
-		"@types/node": "^7.0.5",
-		"typescript": "^2.1.5",
-		"vscode": "^1.0.3"
+		"@types/node": "^8.10.49",
+		"typescript": "^3.5.1",
+		"vscode": "^1.1.34"
 	}
 }
